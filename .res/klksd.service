@@ -1,0 +1,37 @@
+# assuming klksd binary is /usr/local/bin/klksd
+# assuming chmod +x /usr/local/bin/klksd
+#
+# Copy the service file:
+# cp ./klksd.service /lib/systemd/system/klksd.service
+# chmod 644 /lib/systemd/system/klksd.service
+#
+# Install service file:
+# systemctl daemon-reload
+# systemctl enable klksd.service
+# Run service:
+# systemctl start klksd.service
+# Check status:
+# systemctl status klksd.service
+# Stop service:
+# systemctl stop klksd.service
+#
+# Remove service:
+# systemctl disable klksd.service
+
+[Unit]
+Description=Kalkulus Daemon
+After=syslog.target
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/usr/local/bin/klksd.pid
+ExecStart=/usr/local/bin/klksd -daemon -staking=0 -datadir=/root/klksdata/ -pid=klksd.pid -conf=klks.conf
+ExecStop=/pandacoin/daemon/pandacoind stop
+ExecReload=/usr/local/bin/klksd stop ; /bin/sleep 60 ; /usr/local/bin/klksd -daemon -staking=0 -datadir=/root/klksdata/ -pid=klksd.pid -conf=klks.conf
+RestartSec=300
+WorkingDirectory=/root/klksdata/
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

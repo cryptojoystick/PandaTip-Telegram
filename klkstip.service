@@ -1,0 +1,29 @@
+# cp ./klksd.service /lib/systemd/system/klksd.service
+# chmod 644 /lib/systemd/system/klksd.service
+# Don't forget #!/usr/bin/python
+# chmod +x ./KlksTip.py
+# systemctl daemon-reload
+# systemctl enable klksd.service
+# systemctl start klksd.service
+# Status:
+# systemctl status klksd.service
+# To stop:
+# systemctl stop klksd.service
+# To remove
+# systemctl disable klksd.service
+
+[Unit]
+Description=KlksTipBot
+After=syslog.target
+After=network.target
+After=klksd.service
+
+[Service]
+Type=simple
+ExecStart=/klkstip-telegram/KlksTip.py
+WorkingDirectory=/klkstip-telegram
+Restart=always
+RestartSec=600
+
+[Install]
+WantedBy=multi-user.target

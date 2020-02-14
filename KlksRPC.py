@@ -32,13 +32,13 @@ class Wrapper(object, MethodMissing):
 			return self.http_post_request(name, args)
 
 
-class PandaRPC(object):
+class KlksRPC(object):
 	def __init__(self, uri, auth):
 		self.uri = uri
 		self.auth = auth
 
 	def http_post_request(self, name, args):
-		data = {"jsonrpc": "1.0", "id": "pandatip", "method": name, "params": args}
+		data = {"jsonrpc": "1.0", "id": "klkstip", "method": name, "params": args}
 		try:
 			req = requests.post(
 				url=self.uri,
@@ -69,9 +69,9 @@ class PandaRPC(object):
 
 def main():
 	_config = load_file_json("config.json") 
-	myPanda = Wrapper(PandaRPC(_config["rpc-uri"], (_config["rpc-user"], _config["rpc-psw"])))
+	myKlks = Wrapper(KlksRPC(_config["rpc-uri"], (_config["rpc-user"], _config["rpc-psw"])))
 	# getaccountaddress creates an address if account doesn't exist
-	res = myPanda.getaddressesbyaccount("tmp")
+	res = myKlks.getaddressesbyaccount("tmp")
 	if not res["success"]:
 		print("Error: %s" % res["message"])
 	else:
@@ -80,7 +80,7 @@ def main():
 		else:
 			print(json.dumps(res["result"]["result"]))
 	return
-	res = myPanda.sendmany("PandaTip", {"@jahus": 5, "1234": 6})
+	res = myKlks.sendmany("KlksTip", {"@jahus": 5, "1234": 6})
 	if not res["success"]:
 		print("Error: %s" % res["message"])
 	else:

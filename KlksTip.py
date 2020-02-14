@@ -7,7 +7,7 @@ from telegram.ext import Updater
 from telegram.ext import CommandHandler, CallbackQueryHandler, MessageHandler
 from telegram.ext import filters
 from telegram import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
-from PandaRPC import PandaRPC, Wrapper as RPCWrapper
+from KlksRPC import KlksRPC, Wrapper as RPCWrapper
 from HelperFunctions import *
 import logging
 logging.basicConfig(
@@ -28,7 +28,7 @@ _rain_queues = {
 }
 
 # Constants
-__wallet_rpc = RPCWrapper(PandaRPC(config["rpc-uri"], (config["rpc-user"], config["rpc-psw"])))
+__wallet_rpc = RPCWrapper(KlksRPC(config["rpc-uri"], (config["rpc-user"], config["rpc-psw"])))
 __rain_queue_filter = filters.Filters.group & (
 		filters.Filters.text | filters.Filters.photo | filters.Filters.video | filters.Filters.reply | filters.Filters.forwarded
 	)
@@ -276,7 +276,7 @@ def balance(bot, update):
 		if _paused:
 			update.message.reply_text(text=emoji.emojize(strings.get("global_paused"), use_aliases=True), quote=True)
 			return
-		# See issue #2 (https://github.com/DarthJahus/PandaTip-Telegram/issues/2)
+		# See issue #2 (https://github.com/DarthJahus/KlksTip-Telegram/issues/2)
 		_username = update.effective_user.username
 		if _username is None:
 			_user_id = str(update.effective_user.id)
@@ -580,7 +580,7 @@ def do_tip(bot, update, amounts_float, recipients, handled, verb="tip"):
 							continue
 						if _recipient[0] == '@':
 							# ToDo: Get the id (actually not possible (Bot API 3.6, Feb. 2018)
-							# See issue #2 (https://github.com/DarthJahus/PandaTip-Telegram/issues/2)
+							# See issue #2 (https://github.com/DarthJahus/KlksTip-Telegram/issues/2)
 							# Using the @username
 							# Done: When requesting a new address, if user has a @username, then use that username (2018-07-16)
 							# Problem: If someone has no username, then later creates one, he loses access to his account

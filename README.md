@@ -1,4 +1,4 @@
-## PandaTip - Pandacoin tipbot for Telegram
+## KalkulusTip - Kalkulus tipbot for Telegram
  
 ### Dependencies 
 
@@ -9,7 +9,7 @@
 * `pip install emoji`
 
 
-In order to run the tip-bot a Pandacoin-Core client is needed (pandacoind). 
+In order to run the tip-bot a kalkulus client is needed (klksd). 
 
 ### Configuration file
 
@@ -19,7 +19,7 @@ Create a `config.json` **JSON** file and set up the following parameters:
  
     {
     	"telegram-token": "such:sicret-token",
-    	"telegram-botname": "PandaTip",
+    	"telegram-botname": "KlksTip",
     	"rpc-uri": "http://127.0.0.1:22444",
     	"rpc-user": "panda",
     	"rpc-psw": "suchpassword",
@@ -31,18 +31,18 @@ Create a `config.json` **JSON** file and set up the following parameters:
   > Create a new bot by talking with [@BotFather](https://t.me/BotFather) to get one. 
 * `rpc-uri`: Address and port for the daemon.
   > We do not advice to expose the port to external network. Please, be cautious.
-  > See [next section](#Pandacoin-daemon-configuration) to allow access for network addresses.
+  > See [next section](#Kalkulus-daemon-configuration) to allow access for network addresses.
 * `rpc-user`, `rpc-psw`: Username and password for the daemon.
-  > You can set them in the `pandacoin.conf` file ([see next section](#Pandacoin-daemon-configuration)).
+  > You can set them in the `klks.conf` file ([see next section](#Kalkulus-daemon-configuration)).
 * `admins`: An array of administrators' Telegram UserID (as integers).
   > You can send `/user_id` to [@ContremaitreBot](https://t.me/ContremaitreBot) to know your UserID.
 * `spam_filter`: An array of two integers. The first value is the number of actions a user can perform in a period of time, the 2nd value defines that period of time in seconds.
   > `"spam_filter": [5, 60]` means that users cannot perform more than 5 actions per minute.
 
 
-### Pandacoin daemon configuration
+### Kalkulus daemon configuration
 
-A `pandacoin.conf` file is needed in data directory.
+A `klks.conf` file is needed in data directory.
 
 (sample)
 
